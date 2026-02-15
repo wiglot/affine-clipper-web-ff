@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html id="popup">
+
+<head>
+	<title data-i18n="extensionName">AFFiNE Web Clipper</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<link rel="stylesheet" href="style.css">
+	<script src="browser-polyfill.min.js"></script>
+</head>
+
+<body id="popup-container">
+	<p class="error-message" style="display: none;"></p>
+	<div id="clipper-container" class="clipper">
+		<textarea id="note-name-field" type="text" data-i18n="noteName" rows="1"></textarea>
+		<textarea id="note-content-field" rows="4" data-i18n="notesAboutPage"></textarea>
+		<label class="select-item" for="cloud-select">
+			<span data-i18n="cloudDestination">Cloud</span>
+			<select id="cloud-select" name="cloud-select">
+				<option value="affine-cloud">AFFiNE Cloud</option>
+			</select>
+		</label>
+		<label class="select-item" for="destination-select">
+			<span data-i18n="workspaceDestination">Save to</span>
+			<select id="destination-select" name="destination-select">
+				<option value="last-open-workspace">Current workspace</option>
+				<option value="select-by-user">Select during import</option>
+			</select>
+		</label>
+		<div class="action-button">
+			<button id="clip-btn" class="mod-cta" data-i18n="addToAFFiNE">Add to AFFiNE</button>
+			<div class="menu-btn">
+				<button id="more-btn"><i data-lucide="chevron-down"></i></button>
+				<div class="menu" id="more-dropdown">
+					<div class="menu-item" id="copy-content">
+						<div class="menu-item-icon">
+							<i data-lucide="copy"></i>
+						</div>
+						<div class="menu-item-title" data-i18n="copyToClipboard">
+							Copy to clipboard
+						</div>
+					</div>
+					<div class="menu-item" id="save-downloads">
+						<div class="menu-item-icon">
+							<i data-lucide="file-down"></i>
+						</div>
+						<div class="menu-item-title" data-i18n="saveFile">
+							Save file...
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="selfhost-dialog-mask" id="selfhost-dialog-mask">
+		<div id="selfhost-dialog" class="selfhost-dialog">
+			<span class="title">Add self-hosted cloud</span>
+			<input type="text" id="cloud-url" placeholder="Enter cloud URL"></input>
+			<button class="mod-cta" id="add-server-btn">Add server</button>
+		</div>
+	</div>
+	<script type="module" src="popup.js"></script>
+</body>
+
+</html>
