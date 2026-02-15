@@ -3,8 +3,8 @@
   "default_locale": "en",
   "name": "AFFiNE Web Clipper",
   "homepage_url": "https://github.com/toeverything/AFFiNE",
-  "version": "0.0.7",
-  "description": "Save pages in a private and durable format that you can access offline. The official extension for AFFiNE.",
+  "version": "0.0.7.1",
+  "description": "Save web pages in a private and durable format that you can access offline. This is a community-maintained conversion of the official AFFiNE Web Clipper for Firefox. The extension is provided as-is and is not officially endorsed by AFFiNE.",
   "permissions": [
     "activeTab",
     "clipboardWrite",
@@ -75,7 +75,16 @@
   },
   "browser_specific_settings": {
     "gecko": {
-      "id": "affine-clipper-ff@yourdomain.com"
+      "id": "affine-clipper-ff@ceos.app.br",
+      "data_collection_permissions": {
+        "required": [
+          "browsingActivity",
+          "websiteContent"
+        ],
+        "optional": [
+          "technicalAndInteraction"
+        ]
+      }
     }
   }
 }
