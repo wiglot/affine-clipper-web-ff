@@ -1,0 +1,46 @@
+# Publish Firefox extension to addons.mozilla.org (AMO)
+#
+# Required secrets (Settings → Secrets and variables → Actions):
+#   AMO_API_KEY   - JWT issuer from https://addons.mozilla.org/developers/addon/api/key/
+#   AMO_API_SECRET - JWT secret from the same page
+#
+name: Publish to Firefox Add-ons (AMO)
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  publish:
+    name: Build and publish to AMO
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build XPI
+        id: build
+        uses: kewisch/action-web-ext@v1
+        with:
+          cmd: build
+          source: dist
+          filename: "{name}-{version}.xpi"
+
+      - name: Sign and publish to AMO
+        id: sign
+        uses: kewisch/action-web-ext@v1
+        with:
+          cmd: sign
+          source: ${{ steps.build.outputs.target }}
+          channel: listed
+          metaDataFile: amo-metadata.json
+          apiKey: ${{ secrets.AMO_API_KEY }}
+          apiSecret: ${{ secrets.AMO_API_SECRET }}
+          timeout: 900000
+
+      - name: Upload signed artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: signed-extension
+          path: ${{ steps.sign.outputs.target }}
